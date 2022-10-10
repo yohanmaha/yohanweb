@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" class="">
+</head>
+<body>
+  <div class="contact-banner">
+    <h1>Comment</h1>
+
+
+  </div>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getDatabase, set,ref } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDDq_pfQgzQbNARjlGZ-MGq8k2S68O0-w8",
+          authDomain: "batch21-c9328.firebaseapp.com",
+          databaseURL: "https://batch21-c9328-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "batch21-c9328",
+          storageBucket: "batch21-c9328.appspot.com",
+          messagingSenderId: "677497024369",
+          appId: "1:677497024369:web:d71588546b99a705df10d0",
+          measurementId: "G-T2QDX63QKG"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
+
+        document.getElementById("userform").addEventListener("submit", function(e){
+          e.preventDefault();
+          let name = document.getElementById("name").value;
+          let email = document.getElementById("email").value;
+          let contact = document.getElementById("contact").value;
+          let address = document.getElementById("address").value;
+          let message = document.getElementById("message").value;
+
+          set(ref(db, 'users/' + name), {
+        email: email,
+        contact: contact,
+        address: address,
+        message: message,
+        });
+  });    
+  
+
+      </script>
+
+<form method="post" id="userform">
+  
+  <div class="form-control">
+    <label>Full Name</label>
+    <input type="text" id="name" required placeholder="First and Last Name"></input>
+    <div class="error hide">Name is required</div>
+  </div>
+
+  <div class="form-control">
+    <label>Full Name</label>
+    <input type="email" id="email" required placeholder="eg: 123@gmail.com"></input>
+    <div class="error hide">E mail is invalid</div>
+  </div>
+
+  <div class="form-control">
+    <label>Contact No</label>
+    <input type="phone" id="contact" required placeholder="+94 567 6778"></input>
+    <div class="error hide">Name is required</div>
+  </div>
+
+  <div class="form-control">
+    <label>Address</label>
+    <input type="address" id="address" required placeholder="Type your address"></input>
+    <div class="error hide">Name is required</div>
+  </div>
+
+  <div class="form-control">
+    <label>Message</label>
+    <textarea name="message" id="message"></textarea>
+    <div class="error hide">Message is required</div>
+  </div>
+ 
+
+  <button  type="submit">SUBMIT FORM</button>
+  
+
+</form>
+<Script src="script.js"></Script>
+
+</body>
+</html>
